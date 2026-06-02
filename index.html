@@ -73,10 +73,10 @@
   <div class="form-wrap">
     <div id="form-area">
       <div class="input-row">
-        <input type="email" id="email-input" placeholder="이메일 주소를 입력해주세요" />
+        <input type="tel" id="phone-input" placeholder="전화번호를 입력해주세요 (010-xxxx-xxxx)" />
         <button class="btn" id="submit-btn" onclick="handleSubmit()">출시 알림 받기 ✨</button>
       </div>
-      <p class="error-msg" id="error-msg">올바른 이메일 주소를 입력해주세요</p>
+      <p class="error-msg" id="error-msg">올바른 전화번호를 입력해주세요</p>
     </div>
     <div class="success-msg" id="success-area">
       <span class="check">🎀</span>
@@ -113,10 +113,10 @@
 
   // ── FORM ──
   async function handleSubmit() {
-    const val = document.getElementById('email-input').value.trim();
+    const val = document.getElementById('phone-input').value.trim().replace(/-/g, '');
     const errorMsg = document.getElementById('error-msg');
     const btn = document.getElementById('submit-btn');
-    if (!val || !val.includes('@') || !val.includes('.')) {
+    if (!val || val.length < 10 || isNaN(val)) {
       errorMsg.style.display = 'block';
       document.querySelector('.input-row').style.borderColor = 'var(--accent)';
       return;
@@ -129,7 +129,7 @@
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: val })
+        body: JSON.stringify({ email: val, phone: val })
       });
     } catch(e) { console.log(e); }
     document.getElementById('form-area').style.display = 'none';
@@ -137,7 +137,7 @@
     success.style.display = 'flex';
   }
 
-  document.getElementById('email-input').addEventListener('keydown', e => { if (e.key === 'Enter') handleSubmit(); });
+  document.getElementById('phone-input').addEventListener('keydown', e => { if (e.key === 'Enter') handleSubmit(); });
 </script>
 </body>
 </html>
