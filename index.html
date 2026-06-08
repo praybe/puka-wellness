@@ -11,6 +11,11 @@
       --cream: #FFFDF8; --pink: #FF6B9D; --pink-light: #FFD6E8;
       --yellow: #FFD93D; --purple: #C084FC; --text: #1A1A2E; --text-soft: #6B7280;
     }
+
+    /* 커스텀 커서 */
+    * { cursor: none !important; }
+    .cursor { position: fixed; pointer-events: none; z-index: 9999; font-size: 22px; transform: translate(-50%,-50%); transition: transform 0.1s; line-height: 1; }
+
     html { scroll-behavior: smooth; }
     body { font-family: 'Noto Sans KR', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
 
@@ -40,9 +45,9 @@
 
     /* HERO */
     .hero {
-      min-height: 100svh; position: relative;
+      min-height: 85vh; position: relative;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      overflow: hidden; padding: 100px 24px 60px;
+      overflow: hidden; padding: 80px 24px 40px;
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -61,12 +66,12 @@
     }
     .hero-title {
       font-family: 'Gaegu', cursive;
-      font-size: clamp(36px, 9vw, 88px);
+      font-size: clamp(28px, 6vw, 64px);
       line-height: 1.15; margin-bottom: 20px;
     }
     .hero-title .t1 { display: block; color: var(--text); }
     .hero-title .t2 {
-      display: block;
+      display: block; white-space: nowrap;
       background: linear-gradient(135deg, var(--pink), var(--purple));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
@@ -87,7 +92,7 @@
 
     /* BRAND SECTION */
     .brand {
-      min-height: 60vw; position: relative;
+      min-height: 45vw; position: relative;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
     }
@@ -252,6 +257,7 @@
 </head>
 <body>
 
+<div class="cursor" id="cursor">🐻</div>
 <nav>
   <div class="nav-logo">PUKA</div>
   <a href="#register" class="nav-cta">출시 알림 받기 ✨</a>
@@ -357,6 +363,10 @@
 <footer>© 2026 PUKA. Made with 🐻 in Seoul.</footer>
 
 <script>
+  // 커스텀 커서
+  const cur = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMN_Phdh2TCNIgz3AOMa7oyRuaWs7ao0Al-sQls5gbADYL4h27IdvxXRxlAp3makgS/exec';
 
   // 스크롤 애니메이션
