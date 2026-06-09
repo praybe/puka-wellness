@@ -369,17 +369,7 @@
     <h2 style="text-align:center; white-space:nowrap;"><span style="background: linear-gradient(135deg, var(--pink), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">가장 먼저 만나보세요</span> 🐻</h2>
     <p>전화번호를 남겨주시면 출시 알림과 함께<br>사전예약 혜택을 가장 먼저 보내드려요.</p>
     <div id="form-area">
-      <div class="check-list">
-        <label class="check-item">
-          <input type="checkbox" id="check-age" onchange="updateSubmitBtn()"/>
-          <label for="check-age"><span>(필수)</span> 만 19세 이상입니다.</label>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" id="check-privacy" onchange="updateSubmitBtn()"/>
-          <label for="check-privacy"><span>(필수)</span> 개인정보 수집·이용에 동의합니다. <a href="#privacy-modal" class="privacy-link" onclick="showPrivacy(event)">자세히 보기</a></label>
-        </label>
-      </div>
-      <div class="input-row">
+            <div class="input-row">
         <input type="tel" id="phone-input" placeholder="01012345678" inputmode="numeric" pattern="[0-9]*" maxlength="11"/>
         <button class="submit-btn" id="submit-btn" onclick="handleSubmit()" disabled>알림 받기 ✨</button>
       </div>
