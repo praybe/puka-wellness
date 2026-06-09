@@ -225,6 +225,20 @@
     .submit-btn:hover { transform: scale(1.05); }
     .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
     .error-msg { font-size: 12px; color: var(--pink); display: none; margin-bottom: 8px; }
+    .agree-wrap { margin: 16px 0 8px; text-align: left; }
+    .agree-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; cursor: pointer; }
+    .agree-item input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; margin-top: 2px; accent-color: var(--pink); cursor: pointer; }
+    .agree-item label { font-size: 13px; color: var(--text-soft); line-height: 1.5; cursor: pointer; }
+    .agree-item label span { color: var(--pink); font-weight: 700; }
+    .agree-link { color: var(--pink); text-decoration: underline; font-size: 12px; }
+
+    .check-list { margin-bottom: 16px; text-align: left; }
+    .check-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; cursor: pointer; }
+    .check-item input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; accent-color: var(--pink); margin-top: 1px; cursor: pointer; }
+    .check-item label { font-size: 13px; color: var(--text-soft); line-height: 1.5; cursor: pointer; }
+    .check-item label span { color: var(--pink); font-weight: 700; }
+    .privacy-link { color: var(--pink); text-decoration: underline; font-size: 12px; }
+    .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
     .disclaimer { font-size: 11px; color: var(--text-soft); text-align: center; }
     .success-msg {
       display: none; flex-direction: column; align-items: center; gap: 10px;
@@ -243,6 +257,15 @@
     .x-link:hover { background: var(--pink-light); color: var(--pink); border-color: var(--pink); }
     .x-link svg { width: 13px; height: 13px; fill: currentColor; }
 
+    
+    .privacy-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px; }
+    .privacy-modal.open { display:flex; }
+    .privacy-box { background:white; border-radius:20px; padding:32px 24px; max-width:480px; width:100%; max-height:80vh; overflow-y:auto; }
+    .privacy-box h3 { font-size:16px; font-weight:700; margin-bottom:16px; color:var(--text); }
+    .privacy-box table { width:100%; border-collapse:collapse; font-size:13px; color:var(--text-soft); }
+    .privacy-box th, .privacy-box td { border:1px solid #eee; padding:8px 10px; text-align:left; }
+    .privacy-box th { background:#fafafa; font-weight:600; color:var(--text); }
+    .privacy-close { margin-top:20px; width:100%; background:var(--pink); color:white; border:none; border-radius:100px; padding:12px; font-family:'A2G',sans-serif; font-size:14px; font-weight:700; cursor:pointer; }
     footer { padding: 32px 20px; text-align: center; font-size: 12px; color: var(--text-soft); border-top: 1px solid var(--pink-light); }
 
     /* 스크롤 애니메이션 */
@@ -346,11 +369,31 @@
     <h2 style="text-align:center; white-space:nowrap;"><span style="background: linear-gradient(135deg, var(--pink), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">가장 먼저 만나보세요</span> 🐻</h2>
     <p>전화번호를 남겨주시면 출시 알림과 함께<br>사전예약 혜택을 가장 먼저 보내드려요.</p>
     <div id="form-area">
+      <div class="check-list">
+        <label class="check-item">
+          <input type="checkbox" id="check-age" onchange="updateSubmitBtn()"/>
+          <label for="check-age"><span>(필수)</span> 만 19세 이상입니다.</label>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="check-privacy" onchange="updateSubmitBtn()"/>
+          <label for="check-privacy"><span>(필수)</span> 개인정보 수집·이용에 동의합니다. <a href="#privacy-modal" class="privacy-link" onclick="showPrivacy(event)">자세히 보기</a></label>
+        </label>
+      </div>
       <div class="input-row">
         <input type="tel" id="phone-input" placeholder="01012345678" inputmode="numeric" pattern="[0-9]*" maxlength="11"/>
-        <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">알림 받기 ✨</button>
+        <button class="submit-btn" id="submit-btn" onclick="handleSubmit()" disabled>알림 받기 ✨</button>
       </div>
       <p class="error-msg" id="error-msg">올바른 전화번호를 입력해주세요</p>
+      <div class="agree-wrap">
+        <div class="agree-item">
+          <input type="checkbox" id="check-age" />
+          <label for="check-age"><span>(필수)</span> 만 19세 이상입니다</label>
+        </div>
+        <div class="agree-item">
+          <input type="checkbox" id="check-privacy" />
+          <label for="check-privacy"><span>(필수)</span> 개인정보 수집·이용에 동의합니다 <a href="#" class="agree-link" onclick="alert('수집항목: 전화번호\n수집목적: 출시 알림 발송\n보유기간: 서비스 출시 후 1년'); return false;">자세히 보기</a></label>
+        </div>
+      </div>
       <p class="disclaimer">출시 소식 전달 외 다른 용도로 사용하지 않아요</p>
     </div>
     <div class="success-msg" id="success-area">
@@ -367,12 +410,39 @@
   </div>
 </section>
 
+
+<div class="privacy-modal" id="privacy-modal">
+  <div class="privacy-box">
+    <h3>개인정보 수집·이용 동의</h3>
+    <table>
+      <tr><th>수집 항목</th><td>휴대폰 번호</td></tr>
+      <tr><th>수집 목적</th><td>PUKA 출시 알림 및 사전예약 혜택 안내</td></tr>
+      <tr><th>보유 기간</th><td>출시 알림 발송 후 즉시 파기<br>(또는 동의 철회 시)</td></tr>
+    </table>
+    <p style="font-size:12px;color:#999;margin-top:12px;">※ 동의를 거부할 권리가 있으며, 거부 시 출시 알림 서비스를 받으실 수 없습니다.</p>
+    <button class="privacy-close" onclick="closePrivacy()">확인</button>
+  </div>
+</div>
+
 <footer>© 2026 PUKA. Made with 🐻 in Seoul.</footer>
 
 <script>
   // 커스텀 커서
   const cur = document.getElementById('cursor');
   document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+
+  function updateSubmitBtn() {
+    const age = document.getElementById('check-age').checked;
+    const privacy = document.getElementById('check-privacy').checked;
+    document.getElementById('submit-btn').disabled = !(age && privacy);
+  }
+  function showPrivacy(e) {
+    e.preventDefault();
+    document.getElementById('privacy-modal').classList.add('open');
+  }
+  function closePrivacy() {
+    document.getElementById('privacy-modal').classList.remove('open');
+  }
 
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMN_Phdh2TCNIgz3AOMa7oyRuaWs7ao0Al-sQls5gbADYL4h27IdvxXRxlAp3makgS/exec';
 
@@ -391,6 +461,12 @@
       err.style.display = 'block';
       return;
     }
+    if (!document.getElementById('check-age').checked || !document.getElementById('check-privacy').checked) {
+      err.textContent = '필수 항목에 모두 동의해주세요';
+      err.style.display = 'block';
+      return;
+    }
+    err.textContent = '올바른 전화번호를 입력해주세요';
     err.style.display = 'none';
     btn.disabled = true; btn.textContent = '등록 중...';
     try {
