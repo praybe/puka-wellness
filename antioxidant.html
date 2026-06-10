@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PUKA VITAL — 세포를 위한 항산화 비타민</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111111;
+      --white: #ffffff;
+      --gray-100: #f5f5f5;
+      --gray-300: #cccccc;
+      --gray-500: #888888;
+      --font-display: 'Georgia', serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gray-300);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      font-weight: 400;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-cta {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 2px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 32px 80px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 32px;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gray-500);
+    }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--gray-500);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 48px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--black);
+      color: var(--white);
+      padding: 16px 36px;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-body);
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.75; }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--gray-300);
+      margin: 0 32px;
+    }
+
+    /* SECTION */
+    section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 32px;
+    }
+    .section-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 400;
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--gray-500);
+    }
+    .section-body {
+      font-size: 16px;
+      color: var(--gray-500);
+      line-height: 1.8;
+    }
+
+    /* INGREDIENT GRID */
+    .ingredient-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--gray-300);
+      border: 1px solid var(--gray-300);
+      margin-top: 48px;
+    }
+    .ingredient-card {
+      background: var(--white);
+      padding: 32px 24px;
+    }
+    .ingredient-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .ingredient-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+    .ingredient-desc {
+      font-size: 14px;
+      color: var(--gray-500);
+      line-height: 1.7;
+    }
+
+    /* STAT ROW */
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 48px;
+      padding-top: 48px;
+      border-top: 1px solid var(--gray-300);
+    }
+    .stat-item {}
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-desc {
+      font-size: 13px;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    /* STORY */
+    .story-block {
+      border-left: 2px solid var(--black);
+      padding-left: 28px;
+      margin-top: 40px;
+    }
+    .story-block p {
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+    .story-block p:last-child { margin-bottom: 0; }
+
+    /* FORM SECTION */
+    #register {
+      background: var(--gray-100);
+      max-width: 100%;
+      padding: 80px 32px;
+    }
+    .form-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .form-inner .section-eyebrow { margin-bottom: 16px; }
+    .form-inner .section-title { margin-bottom: 12px; }
+    .form-inner .section-body { margin-bottom: 40px; }
+
+    .form-label {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      display: block;
+      margin-bottom: 12px;
+    }
+    .type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .type-option {
+      position: relative;
+    }
+    .type-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+    .type-option label {
+      display: block;
+      padding: 16px 20px;
+      border: 1px solid var(--gray-300);
+      background: var(--white);
+      font-size: 14px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      text-align: center;
+    }
+    .type-option input[type="radio"]:checked + label {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+    }
+    .type-option label:hover { border-color: var(--black); }
+
+    .phone-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .phone-input {
+      flex: 1;
+      padding: 16px 18px;
+      border: 1px solid var(--gray-300);
+      background: var(--white);
+      font-size: 15px;
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .phone-input:focus { border-color: var(--black); }
+    .phone-input.error { border-color: #e00; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      background: var(--black);
+      color: var(--white);
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: opacity 0.2s;
+    }
+    .submit-btn:hover { opacity: 0.75; }
+
+    .agree-rows { margin-bottom: 24px; }
+    .agree-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+    .agree-row input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; }
+    .agree-row a { color: var(--gray-500); }
+
+    .error-msg {
+      font-size: 12px;
+      color: #e00;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    /* SUCCESS */
+    .success-box {
+      display: none;
+      text-align: center;
+      padding: 48px 24px;
+    }
+    .success-box .success-icon { font-size: 40px; margin-bottom: 16px; }
+    .success-box h3 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+    .success-box p { font-size: 15px; color: var(--gray-500); }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white);
+      max-width: 480px;
+      width: 90%;
+      padding: 40px 32px;
+    }
+    .modal h4 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+    .modal table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
+    .modal td { padding: 10px 0; border-bottom: 1px solid var(--gray-300); color: var(--gray-500); vertical-align: top; }
+    .modal td:first-child { width: 90px; color: var(--black); font-weight: 500; }
+    .modal p { font-size: 12px; color: var(--gray-500); margin-bottom: 24px; line-height: 1.6; }
+    .modal-close {
+      width: 100%;
+      padding: 14px;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--gray-300);
+      padding: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--gray-500);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    footer a { color: var(--gray-500); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 100px 20px 60px; }
+      section { padding: 60px 20px; }
+      #register { padding: 60px 20px; }
+      .ingredient-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr; gap: 24px; }
+      .type-grid { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 20px; }
+      .divider { margin: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="http://pukawellness.shop" class="nav-logo">PUKA</a>
+    <a href="#register" class="nav-cta">출시 알림 받기</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow">PUKA · Antioxidant</p>
+    <h1 class="hero-title">활성산소와 반응하는<br>비타민, <em>오늘 드셨나요?</em></h1>
+    <p class="hero-sub">
+      비타민C, 비타민E, 나이아신(B3).<br>
+      콜라겐 합성과 에너지 대사에 관여하는 세 가지 영양소를
+      맛있게 먹을 수 있도록 만들었어요.
+    </p>
+    <a href="#register" class="btn-primary">출시 소식 받기</a>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- INGREDIENTS -->
+  <section>
+    <p class="section-eyebrow">성분</p>
+    <h2 class="section-title">무엇이 들어있나요?</h2>
+    <p class="section-body">세 가지 원료를 선택한 이유가 있어요. 각각이 어떤 역할을 하는지 알고 드셔야 하니까요.</p>
+
+    <div class="ingredient-grid">
+      <div class="ingredient-card">
+        <div class="ingredient-name">Vit C</div>
+        <div class="ingredient-label">비타민 C · 아스코르브산</div>
+        <p class="ingredient-desc">
+          체내에서 스스로 만들 수 없어 반드시 외부에서 섭취해야 하는 영양소예요.
+          콜라겐 합성 과정에 필요하며,
+          면역 세포의 정상적인 기능과 관련이 있어요.
+        </p>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-name">Vit E</div>
+        <div class="ingredient-label">비타민 E · 토코페롤</div>
+        <p class="ingredient-desc">
+          활성산소와 반응하는 지용성 비타민이에요.
+          '젊음의 비타민'으로 불리며,
+          혈관 건강과 면역 세포 기능 유지에 관여해요.
+        </p>
+      </div>
+      <div class="ingredient-card">
+        <div class="ingredient-name">B3</div>
+        <div class="ingredient-label">나이아신 · 비타민 B3</div>
+        <p class="ingredient-desc">
+          에너지 대사의 조효소로 작용하는 필수 수용성 비타민이에요.
+          세포의 정상적인 발달과 기능에 관여하며,
+          피부 장벽과도 관련이 있어요.
+        </p>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="stat-number">3</div>
+        <div class="stat-desc">체내에서 스스로 합성되지 않아<br>외부 섭취가 필수인 영양소 수</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">매일</div>
+        <div class="stat-desc">수용성 비타민은 체내에 저장되지 않아<br>매일 보충이 필요해요</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- STORY -->
+  <section>
+    <p class="section-eyebrow">만든 이유</p>
+    <h2 class="section-title">왜 이 제품을<br><em>만들게 됐나요</em></h2>
+
+    <div class="story-block">
+      <p>
+        비타민C와 비타민E, 나이아신은 오랫동안 전 세계에서 꾸준히 주목받아온 영양소예요.
+        콜라겐 합성, 활성산소 반응, 에너지 대사—
+        이 세 가지는 나이에 상관없이 매일 관여하는 과정들이에요.
+      </p>
+      <p>
+        문제는 이걸 매일, 꾸준히 챙기기가 생각보다 어렵다는 거예요.
+        맛없는 알약을 억지로 삼키거나, 귀찮아서 빠뜨리거나.
+      </p>
+      <p>
+        그래서 만들었어요. 먹고 싶어지도록, 자연스럽게 루틴이 될 수 있도록.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- REGISTER FORM -->
+  <section id="register">
+    <div class="form-inner">
+      <p class="section-eyebrow">사전 등록</p>
+      <h2 class="section-title">가장 먼저<br>만나보세요</h2>
+      <p class="section-body">
+        전화번호를 남겨주시면 출시 알림과 함께 사전예약 혜택을 가장 먼저 보내드려요.
+        그리고 하나만 여쭤볼게요 — 어떤 형태로 드시겠어요?
+      </p>
+
+      <div id="form-area">
+        <label class="form-label">선호하는 섭취 형태를 골라주세요</label>
+        <div class="type-grid">
+          <div class="type-option">
+            <input type="radio" name="form_type" id="t1" value="스틱젤리" />
+            <label for="t1">스틱 젤리</label>
+          </div>
+          <div class="type-option">
+            <input type="radio" name="form_type" id="t2" value="곰돌이젤리" />
+            <label for="t2">곰돌이 젤리</label>
+          </div>
+          <div class="type-option">
+            <input type="radio" name="form_type" id="t3" value="발포정" />
+            <label for="t3">발포정</label>
+          </div>
+          <div class="type-option">
+            <input type="radio" name="form_type" id="t4" value="분말" />
+            <label for="t4">물에 타먹는 분말</label>
+          </div>
+        </div>
+
+        <label class="form-label" for="phone">휴대폰 번호</label>
+        <div class="phone-row">
+          <input type="tel" id="phone" class="phone-input" placeholder="010-0000-0000" />
+        </div>
+
+        <div class="agree-rows">
+          <div class="agree-row">
+            <input type="checkbox" id="age" />
+            <label for="age">(필수) 만 19세 이상입니다</label>
+          </div>
+          <div class="agree-row">
+            <input type="checkbox" id="privacy" />
+            <label for="privacy">(필수) 개인정보 수집·이용에 동의합니다
+              <a href="#" onclick="openModal(event)"> [자세히 보기]</a>
+            </label>
+          </div>
+        </div>
+
+        <p class="error-msg" id="error-msg">필수 항목을 모두 입력해주세요.</p>
+
+        <button class="submit-btn" onclick="handleSubmit()">출시 소식 받기</button>
+        <p style="font-size:12px;color:#aaa;margin-top:12px;text-align:center;">
+          출시 소식 전달 외 다른 용도로 사용하지 않아요
+        </p>
+      </div>
+
+      <div class="success-box" id="success-box">
+        <div class="success-icon">✓</div>
+        <h3>등록됐어요</h3>
+        <p>출시 소식, 제일 먼저 전해드릴게요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 PUKA</span>
+    <a href="https://x.com/PUKAwellness" target="_blank">@PUKAwellness</a>
+  </footer>
+
+  <!-- PRIVACY MODAL -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal">
+      <h4>개인정보 수집·이용 동의</h4>
+      <table>
+        <tr><td>수집 항목</td><td>휴대폰 번호</td></tr>
+        <tr><td>수집 목적</td><td>PUKA 출시 알림 및 사전예약 혜택 안내</td></tr>
+        <tr><td>보유 기간</td><td>출시 알림 발송 후 즉시 파기 (또는 동의 철회 시)</td></tr>
+      </table>
+      <p>※ 동의를 거부할 권리가 있으며, 거부 시 출시 알림 서비스를 받으실 수 없습니다.</p>
+      <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">확인</button>
+    </div>
+  </div>
+
+  <script>
+    function openModal(e) {
+      e.preventDefault();
+      document.getElementById('modal').classList.add('open');
+    }
+    function closeModal(e) {
+      if (e.target === document.getElementById('modal')) {
+        document.getElementById('modal').classList.remove('open');
+      }
+    }
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMN_Phdh2TCNIgz3AOMa7oyRuaWs7ao0Al-sQls5gbADYL4h27IdvxXRxlAp3makgS/exec';
+
+    async function handleSubmit() {
+      const phone = document.getElementById('phone').value.trim();
+      const age = document.getElementById('age').checked;
+      const privacy = document.getElementById('privacy').checked;
+      const formType = document.querySelector('input[name="form_type"]:checked');
+      const errMsg = document.getElementById('error-msg');
+      const phoneInput = document.getElementById('phone');
+
+      const phoneValid = /^01[0-9]-?\d{3,4}-?\d{4}$/.test(phone.replace(/\s/g, ''));
+
+      if (!phoneValid) {
+        phoneInput.classList.add('error');
+        errMsg.textContent = '올바른 전화번호를 입력해주세요.';
+        errMsg.style.display = 'block';
+        return;
+      }
+      if (!age || !privacy) {
+        phoneInput.classList.remove('error');
+        errMsg.textContent = '필수 항목에 동의해주세요.';
+        errMsg.style.display = 'block';
+        return;
+      }
+
+      phoneInput.classList.remove('error');
+      errMsg.style.display = 'none';
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST', mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            source: 'antioxidant',
+            phone: phone,
+            form_type: formType ? formType.value : '미선택'
+          })
+        });
+      } catch(e) {}
+
+      document.getElementById('form-area').style.display = 'none';
+      document.getElementById('success-box').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
