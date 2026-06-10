@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PUKA — Pure Kare</title>
   <style>
+    @font-face {
+      font-family: 'A2G';
+      src: url('fonts/A2GRegular.ttf') format('truetype');
+      font-weight: normal;
+      font-display: swap;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
@@ -13,7 +20,7 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-family: 'A2G', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
       background: #ffffff;
       color: #111111;
       display: flex;
@@ -26,20 +33,21 @@
     }
 
     .main-copy {
-      font-family: 'Georgia', serif;
+      font-family: 'A2G', sans-serif;
       font-size: clamp(22px, 4vw, 42px);
       font-weight: 400;
-      line-height: 1.4;
-      letter-spacing: -0.01em;
+      line-height: 1.55;
+      letter-spacing: 0.01em;
       color: #111111;
       margin-bottom: 48px;
     }
 
     .brand {
-      font-size: 12px;
-      letter-spacing: 0.18em;
+      font-family: 'A2G', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #aaaaaa;
+      color: #bbbbbb;
       font-weight: 400;
     }
 
