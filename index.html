@@ -5,22 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PUKA — Pure Kare</title>
   <style>
-    @font-face {
-      font-family: 'A2G';
-      src: url('fonts/A2GRegular.ttf') format('truetype');
-      font-weight: normal;
-      font-display: swap;
-    }
+    @font-face { font-family: 'KeriskeduB'; src: url('fonts/KeriskeduB.ttf') format('truetype'); font-display: swap; }
+    @font-face { font-family: 'GoyangEB'; src: url('fonts/GoyangEB.ttf') format('truetype'); font-display: swap; }
+    @font-face { font-family: 'A2G'; src: url('fonts/A2GRegular.ttf') format('truetype'); font-display: swap; }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body {
-      height: 100%;
-      overflow: hidden;
-    }
+    html, body { height: 100%; overflow: hidden; }
 
     body {
-      font-family: 'A2G', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-family: 'A2G', sans-serif;
       background: #ffffff;
       color: #111111;
       display: flex;
@@ -33,27 +27,23 @@
     }
 
     .main-copy {
-      font-family: 'A2G', sans-serif;
+      font-family: 'GoyangEB', sans-serif;
       font-size: clamp(22px, 4vw, 42px);
       font-weight: 400;
-      line-height: 1.55;
-      letter-spacing: 0.01em;
+      line-height: 1.4;
       color: #111111;
       margin-bottom: 48px;
     }
 
     .brand {
-      font-family: 'A2G', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #bbbbbb;
+      font-family: 'KeriskeduB', sans-serif;
+      font-size: clamp(16px, 2vw, 22px);
+      letter-spacing: 0.18em;
+      color: #aaaaaa;
       font-weight: 400;
     }
 
-    .brand span {
-      color: #888888;
-    }
+    .brand span { color: #888888; }
   </style>
 </head>
 <body>
